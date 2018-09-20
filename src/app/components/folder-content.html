@@ -1,0 +1,14 @@
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Size</th>
+        <th>Full Path</th>
+    </tr>
+    <tbody>
+        <tr *ngFor="let entry of files">
+            <td>{{entry.getValue("Name")}}</td>
+            <td>{{entry.getValue("Size")}}</td>
+            <td>{{entry.getValue("FullPath")}}</td>
+        </tr>
+    </tbody>
+</table>
