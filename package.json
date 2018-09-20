@@ -4,13 +4,12 @@
   "license": "MIT",
   "main": "main.js",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
+    "browser": "ng serve",
+    "electron": "ng build --base-href ./ && electron .",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "electron": "ng build --base-href ./ && electron ."
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
