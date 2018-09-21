@@ -20,8 +20,15 @@
                 top: 0;
                 z-index: 10;
                 text-align: left;
-                border-bottom: 1px solid @color-decent;
                 font-weight: bold;
+                &:after{
+                    content:'';
+                    position:absolute;
+                    left: 0;
+                    bottom: 0;
+                    width:100%;
+                    border-bottom: 1px solid @color-decent;
+                }
             }
             th,
             td {
