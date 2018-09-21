@@ -1,5 +1,6 @@
 <div class="bar">
-    <ng-template ngFor let-entry [ngForOf]="list">
-        <div (click)="navigate(entry.id)" class="part">{{entry.displayName}}</div><div class="separator">{{listSeparator}}</div>
+    <ng-template ngFor let-entry [ngForOf]="list" let-isLast="last" [ngForTrackBy]="trackByFn">
+        <div (click)="navigate(entry.id)" class="part">{{entry.displayName}}</div>
+        <div *ngIf="!isLast" class="separator">{{listSeparator}}</div>
     </ng-template>
 </div>
