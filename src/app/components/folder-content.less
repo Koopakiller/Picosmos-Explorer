@@ -1,0 +1,30 @@
+@import "../styles/common.less";
+.scroller {
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    table {
+        min-width: 100%;
+        border-spacing: 0;
+        border-collapse: collapse;
+        background-color: @color-background;
+        tr.selectable:hover {
+            background-color: @color-highlight;
+        }
+        tr {
+            th {
+                background-color: @color-background;
+                position: sticky;
+                top: 0;
+                z-index: 10;
+                text-align: left;
+                border-bottom: 1px solid @color-decent;
+                font-weight: bold;
+            }
+            th,
+            td {
+                padding: 3px;
+            }
+        }
+    }
+}

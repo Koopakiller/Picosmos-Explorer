@@ -1,14 +1,16 @@
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Size</th>
-        <th>Full Path</th>
-    </tr>
-    <tbody>
-        <tr *ngFor="let entry of list" (click)="navigate(entry)">
-            <td>{{entry.getValue("Name")}}</td>
-            <td>{{entry.getValue("Size")}}</td>
-            <td>{{entry.getValue("FullPath")}}</td>
+<div class="scroller">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Full Path</th>
         </tr>
-    </tbody>
-</table>
+        <tbody>
+            <tr *ngFor="let entry of list" (dblclick)="navigate(entry)" class="selectable">
+                <td>{{entry.getValue("Name")}}</td>
+                <td>{{entry.getValue("Size")}}</td>
+                <td>{{entry.getValue("FullPath")}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
