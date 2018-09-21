@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
       this.currentPath = fullPath;
       this.load();
     }
-    else{
+    else {
       alert("No known listable content!");
     }
   }
@@ -34,21 +34,44 @@ export class AppComponent implements OnInit {
   isLoading: boolean;
   list: FileSystemEntryViewModel[];
   addressBarList: AddressBarEntryViewModel[];
+  addressBarDataProvider: IAddressBarDataProvider = new UnixAddressBarDataProvider();
 
   private load() {
     this.isLoading = true;
 
-    this.addressBarList = [];
-    let address = "";
-    for (let part of this.currentPath.split("/")) {
-      address = `${address}${part}/`;
-      this.addressBarList.push(new AddressBarEntryViewModel(part, address))
-    }
+    this.addressBarList = this.addressBarDataProvider.getParts(this.currentPath);
 
     this._fileSystemService.getContents(this.currentPath).then((result) => {
       this.list = result.map(fullPath => new FileSystemEntryViewModel(fullPath, this._fileSystemService));
       this.isLoading = false;
       console.log(this.list);
     });
+  }
+}
+
+
+interface IAddressBarDataProvider {
+  getParts(fullPath: string);
+}
+
+class UnixAddressBarDataProvider implements IAddressBarDataProvider {
+  getParts(fullPath: string) {
+    let result = [];
+
+    let address = "";
+
+    if(fullPath.startsWith("/")){
+      result.push(new AddressBarEntryViewModel("Root", "/"))
+      address = "/";
+    }
+
+    fullPath = fullPath.replace(/\/$|^\//, "");
+
+    for (let part of fullPath.split("/")) {
+      address = `${address}${part}/`;
+      result.push(new AddressBarEntryViewModel(part, address))
+    }
+
+    return result;
   }
 }

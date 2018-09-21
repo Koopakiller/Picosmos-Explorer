@@ -21,7 +21,7 @@ export class AddressBarComponent implements OnInit {
   public ngOnInit() {
   }
 
-  public navigate(id: string) {
-    this.shouldNavigate.emit(id);
+  public navigate(fullPath: string) {
+    this.shouldNavigate.emit(fullPath);
   }
 }
