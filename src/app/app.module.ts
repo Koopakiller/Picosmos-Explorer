@@ -5,12 +5,14 @@ import { AppComponent } from './app.component';
 import { FileSystemService } from './services/FileSystemService';
 import { FolderContentComponent } from './components/folder-content';
 import { HttpClient } from 'selenium-webdriver/http';
+import { AddressBarComponent } from './components/address-bar';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FolderContentComponent
+    FolderContentComponent,
+    AddressBarComponent
   ],
   imports: [
     BrowserModule

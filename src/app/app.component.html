@@ -1,2 +1,3 @@
 <div *ngIf="isLoading">Loading...</div>
+<address-bar [list]="addressBarList" (shouldNavigate)="navigate($event)" [listSeparator]="'/'"></address-bar>
 <folder-content (shouldNavigate)="navigate($event)" [list]="list"></folder-content>

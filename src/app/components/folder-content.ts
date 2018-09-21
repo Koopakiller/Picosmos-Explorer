@@ -13,8 +13,6 @@ export class FolderContentComponent implements OnInit {
   ) {
   }
 
-  isLoading: boolean = true;
-
   @Output() public shouldNavigate: EventEmitter<string> = new EventEmitter();
 
   @Input() public list: FileSystemEntryViewModel;
