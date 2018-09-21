@@ -37,13 +37,13 @@ export class FileSystemService {
     }
 
     public hasContent(fullPath: string) {
-        try {
-            const stats = fs.statSync(fullPath);
-            return stats.isDirectory();
-        }
-        catch (ex) {
-            return false;
-        }
+        const stats = fs.statSync(fullPath);
+        return stats.isDirectory();
+    }
+
+    public isFile(fullPath: string) {
+        const stats = fs.statSync(fullPath);
+        return stats.isFile();
     }
 }
 

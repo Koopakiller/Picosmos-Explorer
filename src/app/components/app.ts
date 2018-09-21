@@ -22,13 +22,22 @@ export class AppComponent implements OnInit {
   public currentPath: string = "/home/tl/";
 
   public navigate(fullPath) {
-    console.log(`Navigate: ${fullPath}`)
-    if (this._fileSystemService.hasContent(fullPath)) {
-      this.currentPath = fullPath;
-      this.load();
+    console.log(`Navigate: ${fullPath}`);
+    try {
+      if (this._fileSystemService.hasContent(fullPath)) {
+        this.currentPath = fullPath;
+        this.load();
+      }
+      if (this._fileSystemService.isFile(fullPath)) {
+        alert("Should open file, but is still a to do...");
+      }
+      else {
+        alert("No known listable content!");
+      }
     }
-    else {
-      alert("No known listable content!");
+    catch (ex) {
+      console.log({ msg: "An error occured while navigating", info: ex });
+      alert("An error occured");
     }
   }
 
@@ -61,7 +70,7 @@ class UnixAddressBarDataProvider implements IAddressBarDataProvider {
 
     let address = "";
 
-    if(fullPath.startsWith("/")){
+    if (fullPath.startsWith("/")) {
       result.push(new AddressBarEntryViewModel("Root", "/"))
       address = "/";
     }
