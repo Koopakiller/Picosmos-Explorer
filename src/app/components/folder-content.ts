@@ -14,24 +14,32 @@ export class FolderContentComponent implements OnInit {
   }
 
   files: ListEntryViewModel[];
+  isLoading: boolean = true;
 
   public ngOnInit() {
     this._fileSystemService.getContents("/home/tl/").then((result) => {
-      console.log(result);
       this.files = result.map(fullPath => new ListEntryViewModel(fullPath, this._fileSystemService));
+      this.isLoading=false;
     });
   }
 
+  public navigate(entry:ListEntryViewModel){
+    this.isLoading=true;
+    this._fileSystemService.getContents(entry.fullPath).then((result) => {
+      this.files = result.map(fullPath => new ListEntryViewModel(fullPath, this._fileSystemService));
+      this.isLoading=false;
+    });
+  }
 }
 
 class ListEntryViewModel {
 
   public constructor(
-    protected _fullPath: string,
+    public fullPath: string,
     protected _fileSystemService: FileSystemService) {
   }
 
   public getValue(key: string) {
-    return this._fileSystemService.getProperty(this._fullPath, key);
+    return this._fileSystemService.getProperty(this.fullPath, key);
   }
 }
