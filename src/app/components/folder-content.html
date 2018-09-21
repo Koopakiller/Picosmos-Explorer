@@ -3,12 +3,14 @@
         <tr>
             <th>Name</th>
             <th>Size</th>
+            <th>Type</th>
             <th>Full Path</th>
         </tr>
         <tbody>
             <tr *ngFor="let entry of list" (dblclick)="navigate(entry)" class="selectable">
                 <td>{{entry.getValue("Name")}}</td>
-                <td>{{entry.getValue("Size")}}</td>
+                <td style="text-align: right;">{{entry.getValue("Size")}}</td>
+                <td>{{entry.getValue("Type")}}</td>
                 <td>{{entry.getValue("FullPath")}}</td>
             </tr>
         </tbody>
