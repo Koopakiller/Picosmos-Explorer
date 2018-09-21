@@ -2,6 +2,9 @@ import { Injectable } from "@angular/core";
 import { Observable, ReplaySubject, Observer } from "rxjs/Rx";
 import { RequestOptions, Http } from "@angular/http";
 import { FileViewModel } from "../models/File";
+//import * as fs from "fs";
+const fs = (<any>window).require("fs");
+const path = (<any>window).require("path");
 
 @Injectable()
 export class FileSystemService {
@@ -10,14 +13,11 @@ export class FileSystemService {
     ) {
     }
 
-    public async getFiles(folder: string): Promise<string[]> {
+    public async getContents(fullPath: string): Promise<string[]> {
         return new Promise<string[]>((resolve, reject) => {
-            resolve([
-                "File1.txt",
-                "index.html",
-                "README.MD",
-                "New Document.docx"
-            ]);
+            let contents = fs.readdirSync(fullPath);
+            contents = contents.map(entry => path.join(fullPath, entry));
+            resolve(contents);
         })
     }
 
@@ -37,18 +37,24 @@ export class FileSystemService {
 }
 
 interface IPropertyProvider {
-    getValue(fullPath, key);
+    getValue(fullPath, key): any;
     supportedKeys: string[];
 }
 
 class FilePropertyProvider implements IPropertyProvider {
     public supportedKeys: string[] = [
         "Name",
-        "Size",
-        "Type"
+        "Size"
     ]
-    getValue(fullPath: any, key: any) {
-        return key;
+    getValue(fullPath: string, key: string): any {
+        switch (key) {
+            case "Size":
+                const stats = fs.statSync(fullPath)
+                return stats.size;
+            case "Name":
+                return fullPath.substr(Math.max(fullPath.lastIndexOf("/"), fullPath.lastIndexOf("\\")) + 1);
+        }
+        throw "Unknown key";
     }
 }
 
@@ -56,7 +62,7 @@ class PathPropertyProvider implements IPropertyProvider {
     public supportedKeys: string[] = [
         "FullPath"
     ]
-    getValue(fullPath: any, key: any) {
+    getValue(fullPath: string, key: string): any {
         if (key === "FullPath") {
             return fullPath;
         }

@@ -16,7 +16,7 @@ export class FolderContentComponent implements OnInit {
   files: ListEntryViewModel[];
 
   public ngOnInit() {
-    this._fileSystemService.getFiles("").then((result) => {
+    this._fileSystemService.getContents("/home/tl/").then((result) => {
       console.log(result);
       this.files = result.map(fullPath => new ListEntryViewModel(fullPath, this._fileSystemService));
     });
