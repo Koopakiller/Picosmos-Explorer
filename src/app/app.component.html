@@ -1,1 +1,2 @@
-<folder-content></folder-content>
+<div *ngIf="isLoading">Loading...</div>
+<folder-content (shouldNavigate)="navigate($event)" [list]="list"></folder-content>

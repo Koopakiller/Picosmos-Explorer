@@ -5,7 +5,7 @@
         <th>Full Path</th>
     </tr>
     <tbody>
-        <tr *ngFor="let entry of files" (click)="navigate(entry)">
+        <tr *ngFor="let entry of list" (click)="navigate(entry)">
             <td>{{entry.getValue("Name")}}</td>
             <td>{{entry.getValue("Size")}}</td>
             <td>{{entry.getValue("FullPath")}}</td>
