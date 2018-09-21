@@ -1,5 +1,9 @@
 <div class="app">
-    <div class="menu panel">MENU
+    <div class="menu panel">
+        <div class="history-navigation">
+            <span [ngClass]="{'disabled': !canNavigateToPrevious, 'button':true}" (click)="tryNavigateToPrevious()">Previous</span>
+            <span [ngClass]="{'disabled': !canNavigateToNext, 'button':true}" (click)="tryNavigateToNext()">Next</span>
+        </div>
         <div *ngIf="isLoading">Loading...</div>
     </div>
     <div class="addressBar panel">

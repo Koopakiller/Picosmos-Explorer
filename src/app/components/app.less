@@ -1,5 +1,4 @@
 @import "../styles/common.less";
-
 .app {
     display: grid;
     background-color: @color-decent;
@@ -19,6 +18,17 @@
         grid-column-end: 3;
         grid-row-start: 1;
         grid-row-end: 1;
+        background-color: @color-background;
+        .history-navigation {
+            display: inline-block;
+            .button {
+                background-color: @color-background;
+                color: @color-foreground;
+                &.disabled {
+                    color: @color-decent;
+                }
+            }
+        }
     }
     .addressBar {
         grid-column-start: 1;

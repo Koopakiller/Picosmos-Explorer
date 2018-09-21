@@ -20,6 +20,28 @@ export class AppComponent implements OnInit {
   }
 
   public currentPath: string;
+  public history: string[] = [];
+  public historyPosition: number = -1;
+
+  public get canNavigateToPrevious() {
+    return this.historyPosition > 0;
+  }
+
+  public get canNavigateToNext() {
+    return this.historyPosition < this.history.length - 1;
+  }
+
+  public tryNavigateToPrevious() {
+    if (this.canNavigateToPrevious) {
+      this.load(this.history[--this.historyPosition]);
+    }
+  }
+
+  public tryNavigateToNext() {
+    if (this.canNavigateToNext) {
+      this.load(this.history[++this.historyPosition]);
+    }
+  }
 
   public navigate(fullPath) {
     console.log(`Navigate: ${fullPath}`);
@@ -50,9 +72,15 @@ export class AppComponent implements OnInit {
     this._fileSystemService.getContents(fullPath).then((result) => {
       this.list = result.map(fullPath => new FileSystemEntryViewModel(fullPath, this._fileSystemService));
       this.addressBarList = this.addressBarDataProvider.getParts(fullPath);
+
+      if (this.history[this.historyPosition] != fullPath) {
+        this.history.splice(this.historyPosition + 1);
+        this.history.push(fullPath);
+        this.historyPosition++;
+      }
+
       this.currentPath = fullPath;
       this.isLoading = false;
-      console.log(this.list);
     }).catch(reason => {
       console.log({ msg: "Error while loading content", info: reason });
       this.isLoading = false;
