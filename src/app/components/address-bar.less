@@ -1,16 +1,17 @@
 @import "../styles/common.less";
-
-.bar{
+.bar {
     background-color: @color-background;
-    .part{
+    white-space: nowrap;
+    min-width: 100%;
+    float: right;
+    .part {
         display: inline-block;
         padding: @space-normal;
-        &:hover{
+        &:hover {
             background-color: @color-highlight;
         }
     }
-
-    .separator{
+    .separator {
         display: inline-block;
     }
 }
