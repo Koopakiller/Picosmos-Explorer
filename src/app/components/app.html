@@ -1,3 +1,13 @@
-<div *ngIf="isLoading">Loading...</div>
-<address-bar [list]="addressBarList" (shouldNavigate)="navigate($event)" [listSeparator]="'/'"></address-bar>
-<folder-content (shouldNavigate)="navigate($event)" [list]="list"></folder-content>
+<div class="app">
+    <div class="menu panel">MENU
+        <div *ngIf="isLoading">Loading...</div>
+    </div>
+    <div class="addressBar panel">
+        <address-bar [list]="addressBarList" (shouldNavigate)="navigate($event)" [listSeparator]="'/'"></address-bar>
+    </div>
+    <div class="leftView panel">LEFT_VIEW</div>
+    <div class="rightView panel">
+        <folder-content (shouldNavigate)="navigate($event)" [list]="list"></folder-content>
+    </div>
+    <div class="statusBar panel">STATUS_BAR</div>
+</div>
