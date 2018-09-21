@@ -22,8 +22,13 @@ export class AppComponent implements OnInit {
   public currentPath: string = "/home/tl/";
 
   public navigate(fullPath) {
-    this.currentPath = fullPath;
-    this.load();
+    if (this._fileSystemService.hasContent(fullPath)) {
+      this.currentPath = fullPath;
+      this.load();
+    }
+    else{
+      alert("No known listable content!");
+    }
   }
 
   isLoading: boolean;

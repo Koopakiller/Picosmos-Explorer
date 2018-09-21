@@ -35,6 +35,16 @@ export class FileSystemService {
         }
         throw "No provider found";
     }
+
+    public hasContent(fullPath: string) {
+        try {
+            const stats = fs.statSync(fullPath);
+            return stats.isDirectory();
+        }
+        catch (ex) {
+            return false;
+        }
+    }
 }
 
 interface IPropertyProvider {
@@ -49,40 +59,48 @@ class FilePropertyProvider implements IPropertyProvider {
         "Type"
     ]
     getValue(fullPath: string, key: string): string {
-        //? https://nodejs.org/docs/latest/api/fs.html#fs_class_fs_stats
-        const stats = fs.statSync(fullPath)
-        switch (key) {
-            case "Size":
-                if (stats.isFile()) {
-                    return Formatter.formatByteSize(stats.size);
-                }
-                return "";
-            case "Type":
-                if (stats.isFile()) {
-                    return "File";
-                }
-                if (stats.isDirectory()) {
-                    return "Directory";
-                }
-                if (stats.isSymbolicLink()) {
-                    return "Symbolic Link";
-                }
-                if (stats.isSocket()) {
-                    return "Socket";
-                }
-                if (stats.isFIFO()) {
-                    return "Named Pipe";
-                }
-                if (stats.isCharacterDevice()) {
-                    return "Character Device";
-                }
-                if (stats.isBlockDevice()) {
-                    return "Block Device";
-                }
-                return "Unknown";
-            case "Name":
-                return fullPath.substr(Math.max(fullPath.lastIndexOf("/"), fullPath.lastIndexOf("\\")) + 1);
+        if (key === "Name") {
+            return fullPath.substr(Math.max(fullPath.lastIndexOf("/"), fullPath.lastIndexOf("\\")) + 1);
         }
+
+        try {
+            //? https://nodejs.org/docs/latest/api/fs.html#fs_class_fs_stats
+            const stats = fs.statSync(fullPath)
+            switch (key) {
+                case "Size":
+                    if (stats.isFile()) {
+                        return Formatter.formatByteSize(stats.size);
+                    }
+                    return "";
+                case "Type":
+                    if (stats.isFile()) {
+                        return "File";
+                    }
+                    if (stats.isDirectory()) {
+                        return "Directory";
+                    }
+                    if (stats.isSymbolicLink()) {
+                        return "Symbolic Link";
+                    }
+                    if (stats.isSocket()) {
+                        return "Socket";
+                    }
+                    if (stats.isFIFO()) {
+                        return "Named Pipe";
+                    }
+                    if (stats.isCharacterDevice()) {
+                        return "Character Device";
+                    }
+                    if (stats.isBlockDevice()) {
+                        return "Block Device";
+                    }
+                    return "Unknown";
+            }
+        }
+        catch (ex) {
+            return null;
+        }
+
         throw "Unknown key";
     }
 }
