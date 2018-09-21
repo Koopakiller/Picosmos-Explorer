@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable, ReplaySubject, Observer } from "rxjs/Rx";
 import { RequestOptions, Http } from "@angular/http";
 import { FileViewModel } from "../models/File";
+import { Formatter } from "../helper/Formatter";
 //import * as fs from "fs";
 const fs = (<any>window).require("fs");
 const path = (<any>window).require("path");
@@ -37,7 +38,7 @@ export class FileSystemService {
 }
 
 interface IPropertyProvider {
-    getValue(fullPath, key): any;
+    getValue(fullPath, key): string;
     supportedKeys: string[];
 }
 
@@ -46,11 +47,11 @@ class FilePropertyProvider implements IPropertyProvider {
         "Name",
         "Size"
     ]
-    getValue(fullPath: string, key: string): any {
+    getValue(fullPath: string, key: string): string {
         switch (key) {
             case "Size":
                 const stats = fs.statSync(fullPath)
-                return stats.size;
+                return Formatter.formatByteSize(stats.size);
             case "Name":
                 return fullPath.substr(Math.max(fullPath.lastIndexOf("/"), fullPath.lastIndexOf("\\")) + 1);
         }
@@ -62,7 +63,7 @@ class PathPropertyProvider implements IPropertyProvider {
     public supportedKeys: string[] = [
         "FullPath"
     ]
-    getValue(fullPath: string, key: string): any {
+    getValue(fullPath: string, key: string): string {
         if (key === "FullPath") {
             return fullPath;
         }
