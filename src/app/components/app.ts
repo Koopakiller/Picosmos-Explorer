@@ -1,12 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { FileSystemService } from "./services/FileSystemService";
-import { FileSystemEntryViewModel } from "./models/FileSystemEntryViewModel";
-import { AddressBarEntryViewModel } from "./models/AddressBarEntryViewModel";
+import { FileSystemService } from "../services/FileSystemService";
+import { FileSystemEntryViewModel } from "../models/FileSystemEntryViewModel";
+import { AddressBarEntryViewModel } from "../models/AddressBarEntryViewModel";
 
 @Component({
   selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.less"]
+  templateUrl: "./app.html",
+  styleUrls: ["./app.less"]
 })
 export class AppComponent implements OnInit {
 
