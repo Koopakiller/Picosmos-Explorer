@@ -16,19 +16,18 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.load();
+    this.load("/home/tl/");
   }
 
-  public currentPath: string = "/home/tl/";
+  public currentPath: string;
 
   public navigate(fullPath) {
     console.log(`Navigate: ${fullPath}`);
     try {
       if (this._fileSystemService.hasContent(fullPath)) {
-        this.currentPath = fullPath;
-        this.load();
+        this.load(fullPath);
       }
-      if (this._fileSystemService.isFile(fullPath)) {
+      else if (this._fileSystemService.isFile(fullPath)) {
         alert("Should open file, but is still a to do...");
       }
       else {
@@ -46,15 +45,17 @@ export class AppComponent implements OnInit {
   addressBarList: AddressBarEntryViewModel[];
   addressBarDataProvider: IAddressBarDataProvider = new UnixAddressBarDataProvider();
 
-  private load() {
+  private load(fullPath: string) {
     this.isLoading = true;
-
-    this.addressBarList = this.addressBarDataProvider.getParts(this.currentPath);
-
-    this._fileSystemService.getContents(this.currentPath).then((result) => {
+    this._fileSystemService.getContents(fullPath).then((result) => {
       this.list = result.map(fullPath => new FileSystemEntryViewModel(fullPath, this._fileSystemService));
+      this.addressBarList = this.addressBarDataProvider.getParts(fullPath);
+      this.currentPath = fullPath;
       this.isLoading = false;
       console.log(this.list);
+    }).catch(reason => {
+      console.log({ msg: "Error while loading content", info: reason });
+      this.isLoading = false;
     });
   }
 }

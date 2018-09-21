@@ -16,9 +16,14 @@ export class FileSystemService {
 
     public async getContents(fullPath: string): Promise<string[]> {
         return new Promise<string[]>((resolve, reject) => {
-            let contents = fs.readdirSync(fullPath);
-            contents = contents.map(entry => path.join(fullPath, entry));
-            resolve(contents);
+            try {
+                let contents = fs.readdirSync(fullPath);
+                contents = contents.map(entry => path.join(fullPath, entry));
+                resolve(contents);
+            }
+            catch (ex) {
+                reject(ex);
+            }
         })
     }
 
