@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
   public currentPath: string = "/home/tl/";
 
   public navigate(fullPath) {
+    console.log(`Navigate: ${fullPath}`)
     if (this._fileSystemService.hasContent(fullPath)) {
       this.currentPath = fullPath;
       this.load();
@@ -65,7 +66,7 @@ class UnixAddressBarDataProvider implements IAddressBarDataProvider {
       address = "/";
     }
 
-    fullPath = fullPath.replace(/\/$|^\//, "");
+    fullPath = fullPath.replace(/\/$/, "").replace(/^\//, "");
 
     for (let part of fullPath.split("/")) {
       address = `${address}${part}/`;
