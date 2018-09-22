@@ -1,4 +1,4 @@
-<div class="app">
+<div class="app" (window:keydown)="keyDown($event)" (window:keyup)="keyUp($event)">
     <div class="menu panel">
         <div *ngIf="isLoading">Loading...</div>
     </div>

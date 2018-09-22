@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FileSystemService } from "../services/FileSystemService";
 import { FileSystemEntryViewModel } from "../models/FileSystemEntryViewModel";
 import { AddressBarEntryViewModel } from "../models/AddressBarEntryViewModel";
+import { ExplorerStyleListSelector, IListSelector } from "../helper/ListSelector";
 
 @Component({
   selector: "app-root",
@@ -15,17 +16,65 @@ export class AppComponent implements OnInit {
   ) {
   }
 
+  // Common
+  public currentPath: string;
+  public list: FileSystemEntryViewModel[];
+  
+  isLoading: boolean;
+
+  // Angular Lifecycle 
+
   public ngOnInit() {
     this.load("/home/tl/");
   }
 
-  public currentPath: string;
-  public history: string[] = [];
-  public historyPosition: number = -1;
+  // Key Management
+
+  private _observedKeys = ["Shift", "Control"];
+  private _pressedKeys: string[] = [];
+
+  isKeyPressed(checkKey: string) {
+    for (let key of this._pressedKeys) {
+      if (key.startsWith(checkKey)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public keyDown($event) {
+    if (this._observedKeys.indexOf($event.key) === -1) {
+      return;
+    }
+    let code = $event.key + "." + $event.code;
+    if (this._pressedKeys.indexOf(code) === -1) {
+      this._pressedKeys.push(code);
+    }
+  }
+
+  public keyUp($event) {
+    if (this._observedKeys.indexOf($event.key) === -1) {
+      return;
+    }
+    let code = $event.key + "." + $event.code;
+    while (this._pressedKeys.indexOf(code) > -1) {
+      this._pressedKeys.splice(this._pressedKeys.indexOf(code), 1);
+    }
+  }
+
+  // FileSystemEntry Selection
+
+  private _listSelector: IListSelector<FileSystemEntryViewModel> = new ExplorerStyleListSelector<FileSystemEntryViewModel>();
 
   public select(entry: FileSystemEntryViewModel) {
-    entry.isSelected = !entry.isSelected;
+    this._listSelector.processChange(this.list, entry, this.isKeyPressed("Shift"), this.isKeyPressed("Control"),
+      item => item.isSelected = true, item => item.isSelected = false, item => item.isSelected)
   }
+
+  // Navigation History
+
+  public history: string[] = [];
+  public historyPosition: number = -1;
 
   public get canNavigateToPrevious() {
     return this.historyPosition > 0;
@@ -47,6 +96,8 @@ export class AppComponent implements OnInit {
     }
   }
 
+  // Navigation
+
   public navigate(fullPath) {
     console.log(`Navigate: ${fullPath}`);
     try {
@@ -54,7 +105,7 @@ export class AppComponent implements OnInit {
         this.load(fullPath);
       }
       else if (this._fileSystemService.isFile(fullPath)) {
-        alert("Should open file, but is still a to do...");
+        alert("Should open file, but is still a to do..."); // ToDo
       }
       else {
         alert("No known listable content!");
@@ -65,11 +116,6 @@ export class AppComponent implements OnInit {
       alert("An error occured");
     }
   }
-
-  isLoading: boolean;
-  list: FileSystemEntryViewModel[];
-  addressBarList: AddressBarEntryViewModel[];
-  addressBarDataProvider: IAddressBarDataProvider = new UnixAddressBarDataProvider();
 
   private load(fullPath: string) {
     this.isLoading = true;
@@ -90,6 +136,11 @@ export class AppComponent implements OnInit {
       this.isLoading = false;
     });
   }
+
+  // AddressBar
+
+  addressBarList: AddressBarEntryViewModel[];
+  addressBarDataProvider: IAddressBarDataProvider = new UnixAddressBarDataProvider();
 }
 
 
