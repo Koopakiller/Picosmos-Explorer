@@ -18,23 +18,44 @@
         grid-column-end: 3;
         grid-row-start: 1;
         grid-row-end: 1;
-        background-color: @color-background;
-        .history-navigation {
-            display: inline-block;
-            .button {
-                background-color: @color-background;
-                color: @color-foreground;
-                &.disabled {
-                    color: @color-decent;
-                }
-            }
-        }
     }
     .addressBar {
         grid-column-start: 1;
         grid-column-end: 3;
         grid-row-start: 2;
         grid-row-end: 2;
+        display: grid;
+        grid-template-columns: (3*@size-grid) 1fr;
+        grid-template-rows: auto;
+        .buttons {
+            display: inline-block;
+            grid-column: 1 2;
+            .button {
+                box-sizing: border-box;
+                width: @size-grid;
+                height: @size-grid;
+                border-right: 1px solid @color-decent;
+                display: inline-block;
+                background-color: @color-background;
+                color: @color-foreground;
+                padding: @space-normal;
+                &.disabled {
+                    color: @color-decent;
+                }
+                &:not(.disabled) {
+                    &:hover {
+                        background-color: @color-highlight;
+                    }
+                    &:active {
+                        background-color: @color-focus;
+                        color: @color-background;
+                    }
+                }
+            }
+        }
+        .address-bar {
+            grid-column: 2 3;
+        }
     }
     .leftView {
         grid-column-start: 1;

@@ -1,13 +1,12 @@
 <div class="app">
     <div class="menu panel">
-        <div class="history-navigation">
-            <span [ngClass]="{'disabled': !canNavigateToPrevious}" class="button" (click)="tryNavigateToPrevious()">Previous</span>
-            <span [ngClass]="{'disabled': !canNavigateToNext}" class="button" (click)="tryNavigateToNext()">Next</span>
-        </div>
         <div *ngIf="isLoading">Loading...</div>
     </div>
     <div class="addressBar panel">
-        <address-bar [list]="addressBarList" (shouldNavigate)="navigate($event)" [listSeparator]="'/'"></address-bar>
+        <div class="buttons">
+            <div class="button" [ngClass]="{'disabled': !canNavigateToPrevious}" (click)="tryNavigateToPrevious()">&larr;</div><div class="button" [ngClass]="{'disabled': !canNavigateToNext}" (click)="tryNavigateToNext()">&rarr;</div><div class="button" *ngIf="true">&uarr;</div>
+        </div>
+        <address-bar class="address-bar" [list]="addressBarList" (shouldNavigate)="navigate($event)" [listSeparator]="'/'"></address-bar>
     </div>
     <div class="leftView panel">LEFT_VIEW</div>
     <div class="rightView panel">
