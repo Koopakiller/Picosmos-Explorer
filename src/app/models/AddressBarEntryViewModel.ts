@@ -5,4 +5,6 @@ export class AddressBarEntryViewModel {
     public fullPath: string
   ) {
   }
+
+  public isSelected: boolean = false;
 }

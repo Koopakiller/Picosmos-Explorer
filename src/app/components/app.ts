@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   // Common
   public currentPath: string;
   public list: FileSystemEntryViewModel[];
-  
+
   isLoading: boolean;
 
   // Angular Lifecycle 
@@ -121,7 +121,10 @@ export class AppComponent implements OnInit {
     this.isLoading = true;
     this._fileSystemService.getContents(fullPath).then((result) => {
       this.list = result.map(fullPath => new FileSystemEntryViewModel(fullPath, this._fileSystemService));
-      this.addressBarList = this.addressBarDataProvider.getParts(fullPath);
+
+      let addressBarData = this._addressBarDataProvider.getParts(fullPath, this._addressBarPath);
+      this.addressBarList = addressBarData.items;
+      this._addressBarPath = addressBarData.path;
 
       if (this.history[this.historyPosition] != fullPath) {
         this.history.splice(this.historyPosition + 1);
@@ -141,33 +144,43 @@ export class AppComponent implements OnInit {
 
   // AddressBar
 
-  addressBarList: AddressBarEntryViewModel[];
-  addressBarDataProvider: IAddressBarDataProvider = new UnixAddressBarDataProvider();
+  private addressBarList: AddressBarEntryViewModel[];
+  private _addressBarPath: string;
+  private _addressBarDataProvider: IAddressBarDataProvider = new UnixAddressBarDataProvider();
 }
 
 
 interface IAddressBarDataProvider {
-  getParts(fullPath: string);
+  getParts(fullPath: string, oldFullPath: string): { items: AddressBarEntryViewModel[], path: string };
 }
 
 class UnixAddressBarDataProvider implements IAddressBarDataProvider {
-  getParts(fullPath: string) {
-    let result = [];
+  getParts(fullPath: string, oldFullPath: string = null) {
+    if (!fullPath.endsWith("/")) {
+      fullPath = fullPath + "/";
+    }
+
+    let path = oldFullPath && oldFullPath.startsWith(fullPath) ? oldFullPath : fullPath;
+
+    let result: AddressBarEntryViewModel[] = [];
 
     let address = "";
 
-    if (fullPath.startsWith("/")) {
+    if (path.startsWith("/")) {
       result.push(new AddressBarEntryViewModel("Root", "/"))
       address = "/";
     }
 
-    fullPath = fullPath.replace(/\/$/, "").replace(/^\//, "");
+    path = path.replace(/\/$/, "").replace(/^\//, "");
 
-    for (let part of fullPath.split("/")) {
+    for (let part of path.split("/")) {
       address = `${address}${part}/`;
       result.push(new AddressBarEntryViewModel(part, address))
     }
 
-    return result;
+    console.log({ result });
+    result.filter(item => item.fullPath === fullPath)[0].isSelected = true;
+
+    return { items: result, path: "/" + path };
   }
 }
