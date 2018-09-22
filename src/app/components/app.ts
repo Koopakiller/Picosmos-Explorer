@@ -129,6 +129,8 @@ export class AppComponent implements OnInit {
         this.historyPosition++;
       }
 
+      this._listSelector.reset();
+
       this.currentPath = fullPath;
       this.isLoading = false;
     }).catch(reason => {
