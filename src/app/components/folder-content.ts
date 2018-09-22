@@ -14,6 +14,7 @@ export class FolderContentComponent implements OnInit {
   }
 
   @Output() public shouldNavigate: EventEmitter<string> = new EventEmitter();
+  @Output() public shouldSelect: EventEmitter<FileSystemEntryViewModel> = new EventEmitter();
 
   @Input() public list: FileSystemEntryViewModel;
 
@@ -23,5 +24,9 @@ export class FolderContentComponent implements OnInit {
 
   public navigate(entry: FileSystemEntryViewModel) {
     this.shouldNavigate.emit(entry.fullPath);
+  }
+
+  public select(entry: FileSystemEntryViewModel) {
+    this.shouldSelect.emit(entry);
   }
 }

@@ -10,7 +10,7 @@
     </div>
     <div class="leftView panel">LEFT_VIEW</div>
     <div class="rightView panel">
-        <folder-content (shouldNavigate)="navigate($event)" [list]="list"></folder-content>
+        <folder-content (shouldNavigate)="navigate($event)" (shouldSelect)="select($event)" [list]="list"></folder-content>
     </div>
     <div class="statusBar panel">STATUS_BAR</div>
 </div>

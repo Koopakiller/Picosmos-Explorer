@@ -7,7 +7,7 @@
             <th>Full Path</th>
         </tr>
         <tbody>
-            <tr *ngFor="let entry of list" (dblclick)="navigate(entry)" class="selectable">
+            <tr *ngFor="let entry of list" (dblclick)="navigate(entry)" (click)="select(entry)" class="selectable" [ngClass]="{'selected':entry.isSelected}">
                 <td>{{entry.getValue("Name")}}</td>
                 <td style="text-align: right;">{{entry.getValue("Size")}}</td>
                 <td>{{entry.getValue("Type")}}</td>

@@ -13,6 +13,10 @@
         tr.selectable:hover {
             background-color: @color-highlight;
         }
+        tr.selected {
+            color: @color-background;
+            background-color: @color-focus;
+        }
         tr {
             th {
                 background-color: @color-background;
@@ -21,12 +25,13 @@
                 z-index: 10;
                 text-align: left;
                 font-weight: bold;
-                &:after{
-                    content:'';
-                    position:absolute;
+                &:after {
+                    //Line at the bottom which stay when scrolling
+                    content: '';
+                    position: absolute;
                     left: 0;
                     bottom: 0;
-                    width:100%;
+                    width: 100%;
                     border-bottom: 1px solid @color-decent;
                 }
             }

@@ -23,6 +23,10 @@ export class AppComponent implements OnInit {
   public history: string[] = [];
   public historyPosition: number = -1;
 
+  public select(entry: FileSystemEntryViewModel) {
+    entry.isSelected = !entry.isSelected;
+  }
+
   public get canNavigateToPrevious() {
     return this.historyPosition > 0;
   }
