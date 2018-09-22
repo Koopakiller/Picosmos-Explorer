@@ -4,7 +4,7 @@
     </div>
     <div class="addressBar panel">
         <div class="buttons">
-            <div class="button" [ngClass]="{'disabled': !canNavigateToPrevious}" (click)="tryNavigateToPrevious()">&larr;</div><div class="button" [ngClass]="{'disabled': !canNavigateToNext}" (click)="tryNavigateToNext()">&rarr;</div><div class="button" *ngIf="true">&uarr;</div>
+            <div class="button" [ngClass]="{'disabled': !canNavigateToPrevious}" (click)="tryNavigateToPrevious()">&larr;</div><div class="button" [ngClass]="{'disabled': !canNavigateToNext}" (click)="tryNavigateToNext()">&rarr;</div><div class="button" *ngIf="false" [ngClass]="{'disabled': !canNavigateUp}" (click)="tryNavigateUp()">&uarr;</div>
         </div>
         <address-bar class="address-bar" [list]="addressBarList" (shouldNavigate)="navigate($event)" [listSeparator]="'/'"></address-bar>
     </div>
