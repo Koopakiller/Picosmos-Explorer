@@ -4,24 +4,31 @@ const url = require("url");
 
 let win;
 
+app.disableHardwareAcceleration();
+
 function createWindow() {
-  win = new BrowserWindow({ width: 800, height: 600 });
-
-  // load the dist folder from Angular
-  win.loadURL(
-    url.format({
-      pathname: path.join(__dirname, `/dist/index.html`),
-      protocol: "file:",
-      slashes: true
-    })
-  );
-
-  // The following is optional and will open the DevTools:
-  // win.webContents.openDevTools()
-
-  win.on("closed", () => {
-    win = null;
-  });
+    win = new BrowserWindow({
+      width: 800,
+      height: 600,
+      transparent: false,
+      frame: true
+    });
+  
+    // load the dist folder from Angular
+    win.loadURL(
+      url.format({
+        pathname: path.join(__dirname, `/dist/index.html`),
+        protocol: "file:",
+        slashes: true
+      })
+    );
+  
+    // The following is optional and will open the DevTools:
+    // win.webContents.openDevTools()
+  
+    win.on("closed", () => {
+      win = null;
+    });
 }
 
 app.on("ready", createWindow);
