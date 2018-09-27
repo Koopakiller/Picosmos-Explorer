@@ -4,7 +4,7 @@ const url = require("url");
 
 let win;
 
-app.disableHardwareAcceleration();
+//app.disableHardwareAcceleration();
 
 function createWindow() {
     win = new BrowserWindow({
