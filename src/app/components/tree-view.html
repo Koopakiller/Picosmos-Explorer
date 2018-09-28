@@ -1,0 +1,11 @@
+<div *ngFor="let entry of roots">
+    <a (click)="toggleIsExpanded(entry)">
+        <span *ngIf="entry.isExpanded">-</span>
+        <span *ngIf="!entry.isExpanded">+</span>
+    </a>
+    <img src="{{entry.imagePath}}" />
+    <span>{{entry.displayName}}</span>
+    <div *ngIf="entry.hasChildren && entry.isExpanded">
+        <tree-view [roots]="entry.children | async"></tree-view>
+    </div>
+</div>
