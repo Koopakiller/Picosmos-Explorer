@@ -28,7 +28,8 @@ export class AppComponent implements OnInit {
   // Angular Lifecycle 
 
   public ngOnInit() {
-    this.load("/home/tl/");
+    let homePath = this._fileSystemService.getHomePath();
+    this.load(homePath);
   }
 
   // Key Management

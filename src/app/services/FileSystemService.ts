@@ -5,6 +5,7 @@ import { FileViewModel } from "../models/File";
 import { Formatter } from "../helper/Formatter";
 //import * as fs from "fs";
 const fs = (<any>window).require("fs");
+const os = (<any>window).require("os");
 const path = (<any>window).require("path");
 
 @Injectable()
@@ -15,6 +16,10 @@ export class FileSystemService {
 
     getParent(fullPath: string) {
         return path.resolve(fullPath, '..');
+    }
+
+    getHomePath(): string {
+        return os.homedir();
     }
 
     public async getContents(fullPath: string): Promise<string[]> {
