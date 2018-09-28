@@ -5,26 +5,23 @@
     overflow: auto;
     height: 100%;
     white-space: nowrap;
+    color: @color-bright-neutral-1;
     table {
         min-width: 100%;
         border-spacing: 0;
         border-collapse: collapse;
-        background-color: @color-background;
-        tr.selectable:hover {
-            background-color: @color-highlight;
-        }
-        tr.selected {
-            color: @color-background;
-            background-color: @color-focus;
-        }
+        background-color: transparent;
         tr {
+            transition: background-color 50ms ease-out;
+
             th {
-                background-color: @color-background;
+                background-color: transparent;
                 position: sticky;
                 top: 0;
                 z-index: 10;
                 text-align: left;
                 font-weight: bold;
+                color: @color-bright-neutral-2;
                 &:after {
                     //Line at the bottom which stay when scrolling
                     content: '';
@@ -32,12 +29,46 @@
                     left: 0;
                     bottom: 0;
                     width: 100%;
-                    border-bottom: 1px solid @color-decent;
+                    border-bottom: 1px solid @color-bright-neutral-4;
+                }
+            }
+            td {
+                &:first-child {
+                    border-radius: @border-radius 0 0 @border-radius;
+                }
+                &:last-child {
+                    border-radius: 0 @border-radius @border-radius 0;
                 }
             }
             th,
             td {
                 padding: @space-normal;
+            }
+            td+td,
+            th+th {
+                border-left: 1px solid @color-bright-neutral-4;
+            }
+            &:last-child {
+                td+td {
+                    border-left: 1px solid transparent;
+                    border-image: linear-gradient(to bottom, @color-bright-neutral-4 0%, transparent 100%);
+                    border-image-slice: 1;
+                }
+            }
+            &.selectable {
+                &:hover {
+                    background-color: @color-dark-focus-3;
+                }
+                &.selected {
+                    background-color: @color-bright-focus-1;
+                    color: @color-dark-neutral-1;
+                    &:hover {
+                        background-color: @color-bright-focus-2;
+                    }
+                    td+td {
+                        border-left: 1px solid @color-dark-neutral-4;
+                    }
+                }
             }
         }
     }
