@@ -7,7 +7,10 @@ import { ExplorerStyleListSelector, IListSelector } from "../helper/ListSelector
 @Component({
   selector: "app-root",
   templateUrl: "./app.html",
-  styleUrls: ["./app.less"]
+  styleUrls: [
+    "./app.less",
+    "../styles/toolbar.less"
+  ]
 })
 export class AppComponent implements OnInit {
 

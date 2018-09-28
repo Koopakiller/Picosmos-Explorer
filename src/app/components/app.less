@@ -37,34 +37,8 @@
         grid-row-start: 2;
         grid-row-end: 2;
         display: grid;
-        grid-template-columns: (3*@size-grid) 1fr;
+        grid-template-columns: auto 1fr;
         grid-template-rows: auto;
-        .buttons {
-            display: inline-block;
-            grid-column: 1 2;
-            .button {
-                box-sizing: border-box;
-                width: @size-grid;
-                height: @size-grid;
-                border-right: 1px solid @color-decent;
-                display: inline-block;
-                background-color: @color-background;
-                color: @color-foreground;
-                padding: @space-normal;
-                &.disabled {
-                    color: @color-decent;
-                }
-                &:not(.disabled) {
-                    &:hover {
-                        background-color: @color-highlight;
-                    }
-                    &:active {
-                        background-color: @color-focus;
-                        color: @color-background;
-                    }
-                }
-            }
-        }
         .address-bar {
             grid-column: 2 3;
         }
