@@ -101,6 +101,16 @@ export class AppComponent implements OnInit {
 
   // Navigation
 
+  public tryNavigateUp() {
+    let parent = this._fileSystemService.getParent(this.currentPath);
+    this.navigate(parent);
+  }
+
+  public get canNavigateUp() {
+    let parent = this._fileSystemService.getParent(this.currentPath);
+    return parent !== null && parent != this.currentPath;
+  }
+
   public navigate(fullPath) {
     console.log(`Navigate: ${fullPath}`);
     try {

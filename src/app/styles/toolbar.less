@@ -1,0 +1,22 @@
+@import "common.less";
+
+.toolbar-button {
+    display: inline-block;
+    box-sizing: border-box;
+    font-size: 24px;
+    color: @color-bright-neutral-2;
+    text-decoration: none;
+    &.disabled {
+        color: @color-medium-neutral;
+    }
+    &:not(.disabled) {
+        &:hover {
+            color: @color-bright-neutral-1;
+            text-shadow: 0 0 1px @color-bright-neutral-1;
+        }
+        &:active {
+            color: @color-bright-focus-2;
+            text-shadow: 0 0 1px @color-bright-focus-2;
+        }
+    }
+}

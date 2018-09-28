@@ -9,9 +9,12 @@ const path = (<any>window).require("path");
 
 @Injectable()
 export class FileSystemService {
-
     public constructor(
     ) {
+    }
+
+    getParent(fullPath: string) {
+        return path.resolve(fullPath, '..');
     }
 
     public async getContents(fullPath: string): Promise<string[]> {
