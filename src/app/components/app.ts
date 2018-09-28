@@ -3,6 +3,8 @@ import { FileSystemService } from "../services/FileSystemService";
 import { FileSystemEntryViewModel } from "../models/FileSystemEntryViewModel";
 import { AddressBarEntryViewModel } from "../models/AddressBarEntryViewModel";
 import { ExplorerStyleListSelector, IListSelector } from "../helper/ListSelector";
+import { LeftViewItem } from "../models/LeftViewItem";
+import { FileSystemLink } from "../models/FileSystemLink";
 
 @Component({
   selector: "app-root",
@@ -30,6 +32,13 @@ export class AppComponent implements OnInit {
   public ngOnInit() {
     let homePath = this._fileSystemService.getHomePath();
     this.load(homePath);
+
+    this.leftViewItems = [
+      new LeftViewItem("Favorites", [
+        new FileSystemLink("Desktop", this._fileSystemService.combinePaths(homePath, "Desktop")),
+        new FileSystemLink("Downloads", this._fileSystemService.combinePaths(homePath, "Downloads"))
+      ])
+    ];
   }
 
   // Key Management
@@ -65,6 +74,10 @@ export class AppComponent implements OnInit {
       this._pressedKeys.splice(this._pressedKeys.indexOf(code), 1);
     }
   }
+
+  // Left View
+
+  public leftViewItems: LeftViewItem[];
 
   // FileSystemEntry Selection
 

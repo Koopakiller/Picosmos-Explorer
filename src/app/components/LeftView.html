@@ -1,0 +1,4 @@
+<div class="item" *ngFor="let item of items">
+    <span class="header">{{item.displayName}}</span>
+    <a class="link" *ngFor="let link of item.links" class="link" (click)="navigate(link)">{{link.displayName}}</a>
+</div>

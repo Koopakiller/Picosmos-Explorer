@@ -10,7 +10,9 @@
         </div>
         <address-bar class="address-bar" [list]="addressBarList" (shouldNavigate)="navigate($event)" [listSeparator]="'/'"></address-bar>
     </div>
-    <div class="leftView panel">LEFT_VIEW</div>
+    <div class="leftView panel">
+        <left-view [items]="leftViewItems" (shouldNavigate)="navigate($event)"></left-view>
+    </div>
     <div class="rightView panel">
         <folder-content (shouldNavigate)="navigate($event)" (shouldSelect)="select($event)" [list]="list"></folder-content>
     </div>

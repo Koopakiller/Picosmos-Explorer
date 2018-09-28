@@ -22,6 +22,10 @@ export class FileSystemService {
         return os.homedir();
     }
 
+    combinePaths(path1: string, path2: string): string {
+        return path.resolve(path1, path2);
+    }
+
     public async getContents(fullPath: string): Promise<string[]> {
         return new Promise<string[]>((resolve, reject) => {
             try {

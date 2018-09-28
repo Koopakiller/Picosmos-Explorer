@@ -7,6 +7,7 @@ import { FileSystemService } from './services/FileSystemService';
 import { FolderContentComponent } from './components/folder-content';
 import { AddressBarComponent } from './components/address-bar';
 import { TreeViewComponent } from './components/tree-view';
+import { LeftViewComponent } from './components/LeftView';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { TreeViewComponent } from './components/tree-view';
     AppComponent,
     FolderContentComponent,
     AddressBarComponent,
-    TreeViewComponent
+    TreeViewComponent,
+    LeftViewComponent
   ],
   imports: [
     BrowserModule
