@@ -3,7 +3,7 @@
         <div *ngIf="isLoading">Loading...</div>
     </div>
     <div class="addressBar panel">
-        <div class="buttons">
+        <div class="left">
             <a class="toolbar-button material-icons" [ngClass]="{'disabled': !canNavigateToPrevious}" (click)="tryNavigateToPrevious()">navigate_before</a>
             <a class="toolbar-button material-icons" [ngClass]="{'disabled': !canNavigateToNext}" (click)="tryNavigateToNext()">navigate_next</a>
             <a class="toolbar-button material-icons" [ngClass]="{'disabled': !canNavigateUp}" (click)="tryNavigateUp()">arrow_upward</a>

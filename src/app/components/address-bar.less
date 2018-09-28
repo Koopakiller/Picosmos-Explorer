@@ -1,6 +1,7 @@
 @import "../styles/common.less";
 .bar {
-    background-color: @color-background;
+    background-color: transparent;
+    color: @color-bright-neutral-2;
     white-space: nowrap;
     overflow: hidden;
     .bar-inner {
@@ -9,11 +10,12 @@
         .part {
             display: inline-block;
             padding: @space-normal;
-            &:hover {
-                background-color: @color-highlight;
+            &:hover:not(.selected) {
+                color: @color-bright-neutral-1;
+                text-shadow: 0 0 1px @color-bright-neutral-1;
             }
             &.selected {
-                background-color: @color-focus;
+                color: @color-bright-focus-2;
             }
         }
         .separator {
