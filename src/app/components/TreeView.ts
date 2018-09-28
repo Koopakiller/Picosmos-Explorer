@@ -5,8 +5,8 @@ import { ITreeViewItem } from "../models/ITreeViewItem";
 
 @Component({
   selector: "tree-view",
-  templateUrl: "./tree-view.html",
-  styleUrls: ["./tree-view.less"]
+  templateUrl: "./TreeView.html",
+  styleUrls: ["./TreeView.less"]
 })
 export class TreeViewComponent implements OnInit {
 

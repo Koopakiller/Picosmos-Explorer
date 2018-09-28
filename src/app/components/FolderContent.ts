@@ -4,8 +4,8 @@ import { FileSystemEntryViewModel } from "../models/FileSystemEntryViewModel"
 
 @Component({
   selector: "folder-content",
-  templateUrl: "./folder-content.html",
-  styleUrls: ["./folder-content.less"]
+  templateUrl: "./FolderContent.html",
+  styleUrls: ["./FolderContent.less"]
 })
 export class FolderContentComponent implements OnInit {
 

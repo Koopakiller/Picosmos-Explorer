@@ -8,9 +8,9 @@ import { FileSystemLink } from "../models/FileSystemLink";
 
 @Component({
   selector: "app-root",
-  templateUrl: "./app.html",
+  templateUrl: "./App.html",
   styleUrls: [
-    "./app.less",
+    "./App.less",
     "../styles/toolbar.less"
   ]
 })

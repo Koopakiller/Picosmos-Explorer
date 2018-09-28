@@ -3,8 +3,8 @@ import { AddressBarEntryViewModel } from "../models/AddressBarEntryViewModel";
 
 @Component({
   selector: "address-bar",
-  templateUrl: "./address-bar.html",
-  styleUrls: ["./address-bar.less"]
+  templateUrl: "./AddressBar.html",
+  styleUrls: ["./AddressBar.less"]
 })
 export class AddressBarComponent implements OnInit {
 

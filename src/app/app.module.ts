@@ -2,11 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClient } from 'selenium-webdriver/http';
 
-import { AppComponent } from './components/app';
+import { AppComponent } from './components/App';
 import { FileSystemService } from './services/FileSystemService';
-import { FolderContentComponent } from './components/folder-content';
-import { AddressBarComponent } from './components/address-bar';
-import { TreeViewComponent } from './components/tree-view';
+import { FolderContentComponent } from './components/FolderContent';
+import { AddressBarComponent } from './components/AddressBar';
+import { TreeViewComponent } from './components/TreeView';
 import { LeftViewComponent } from './components/LeftView';
 
 
