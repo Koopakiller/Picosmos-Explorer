@@ -37,6 +37,10 @@ export class AppComponent implements OnInit {
       new LeftViewItem("Favorites", [
         new FileSystemLink("Desktop", this._fileSystemService.combinePaths(homePath, "Desktop")),
         new FileSystemLink("Downloads", this._fileSystemService.combinePaths(homePath, "Downloads"))
+      ]),
+      new LeftViewItem("System", [
+        new FileSystemLink("Root", "/"),
+        new FileSystemLink("Home", homePath)
       ])
     ];
   }

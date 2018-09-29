@@ -37,3 +37,40 @@
 @border-radius: 5px;
 
 @section-margin: 5px;
+
+
+
+._clickable-link{
+    color: @color-bright-neutral-3;
+    text-decoration: none;
+
+    transition: text-shadow 100ms ease-out;
+}
+
+._clickable-link-disabled{
+    color: @color-medium-neutral;
+}
+
+._clickable-link-hover{
+    color: @color-bright-neutral-1;
+    text-shadow: 0 0 1px @color-bright-neutral-1;
+}
+
+._clickable-link-selected{
+    color: @color-bright-focus-3;
+}
+
+._clickable-link-active{
+    color: @color-bright-focus-2;
+    text-shadow: 0 0 1px @color-bright-focus-2;
+}
+
+._clickable-link-css{
+    ._clickable-link();
+    &:hover{
+        ._clickable-link-hover();
+    }
+    &:active{
+        ._clickable-link-active();
+    }
+}

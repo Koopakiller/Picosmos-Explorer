@@ -2,7 +2,7 @@
 .app {
     display: grid;
     background-color: transparent;
-    grid-template-columns: 100px 1fr;
+    grid-template-columns: auto 1fr;
     grid-template-rows: auto auto 1fr auto;
     justify-content: stretch;
     grid-column-gap: 1px;
@@ -39,7 +39,7 @@
         display: grid;
         grid-template-columns: auto 1fr;
         grid-template-rows: auto;
-        .left{
+        .left {
             margin: @section-margin;
         }
         .address-bar {
@@ -48,6 +48,7 @@
         }
     }
     .leftView {
+        width: 150px;
         grid-column-start: 1;
         grid-column-end: 1;
         grid-row-start: 3;
